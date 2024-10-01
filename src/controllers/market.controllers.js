@@ -52,10 +52,11 @@ export const getUsuario = async (req, res) => {
 
 
   export const postProductos=async(req,res)=>{
-    try {
-      const { name, description, price_cost, price_sale,quantity,image } = req.body; 
       const cantidad = await pool.query("Select count(*) from productos") + 1;
       const dateHoy = new Date();
+    try {
+      const { name, description, price_cost, price_sale,quantity,image } = req.body; 
+      
       const [rows] = await pool.query("INSERT INTO productos (id, nombre,descripcion,precio_costo,precio_venta,cantidad,fotografia,fecha_creacion) VALUES (?,?,?,?,?,?,?)", [
         cantidad, name, description, price_cost, price_sale,quantity,image,dateHoy,
       ]);
