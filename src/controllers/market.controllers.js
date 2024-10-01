@@ -63,7 +63,7 @@ export const getUsuario = async (req, res) => {
       const day = String(date.getDate()).padStart(2, '0');
       const dateHoy = `${year}-${month}-${day}`;
       const { name, description, price_cost, price_sale,quantity,image } = req.body; 
-      
+      console.log(name);
       const [rows] = await pool.query("INSERT INTO productos (id, nombre,descripcion,precio_costo,precio_venta,cantidad,fotografia,fecha_creacion) VALUES (?,?,?,?,?,?,?,?)", [
         cantidad, name, description, price_cost, price_sale,quantity,image,dateHoy
       ]);
