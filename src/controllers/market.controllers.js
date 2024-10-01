@@ -53,7 +53,11 @@ export const getUsuario = async (req, res) => {
 
   export const postProductos=async(req,res)=>{
       const cantidad = await pool.query("Select count(*) as x from productos");
-      const dateHoy = new Date();
+      const fecha = new Date();
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+      const day = String(date.getDate()).padStart(2, '0');
+      const dateHoy = `${year}-${month}-${day}`;
     try {
       const { name, description, price_cost, price_sale,quantity,image } = req.body; 
       
@@ -65,7 +69,7 @@ export const getUsuario = async (req, res) => {
       }
       res.json({ message: "Producto Agregado" });
     } catch (error) {
-        console.log(JSON.stringify(cantidad));
+        console.log(cantidad);
       return res.status(500).json({ message: `Algo salio mal ${cantidad} y ${dateHoy}`});
     }
   };
