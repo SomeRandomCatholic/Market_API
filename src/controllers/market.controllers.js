@@ -52,7 +52,7 @@ export const getUsuario = async (req, res) => {
 
 
   export const postProductos=async(req,res)=>{
-      const cantidad = await pool.query("Select count(*) from productos");
+      const cantidad = await pool.query("Select count(*) as x from productos");
       const dateHoy = new Date();
     try {
       const { name, description, price_cost, price_sale,quantity,image } = req.body; 
@@ -65,7 +65,7 @@ export const getUsuario = async (req, res) => {
       }
       res.json({ message: "Producto Agregado" });
     } catch (error) {
-        console.log(cantidad);
+        console.log(JSON.stringify(cantidad));
       return res.status(500).json({ message: `Algo salio mal ${cantidad} y ${dateHoy}`});
     }
   };
