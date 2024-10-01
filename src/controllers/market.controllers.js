@@ -65,6 +65,7 @@ export const getUsuario = async (req, res) => {
       }
       res.json({ message: "Producto Agregado" });
     } catch (error) {
+        console.log($cantidad);
       return res.status(500).json({ message: `Algo salio mal ${cantidad} y ${dateHoy}`});
     }
   };
