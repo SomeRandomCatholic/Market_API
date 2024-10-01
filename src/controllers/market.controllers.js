@@ -52,6 +52,8 @@ export const getUsuario = async (req, res) => {
 
 
   export const postProductos=async(req,res)=>{
+      
+    try {
       const respuesta = await pool.query("Select count(*) as x from productos");
       const cantidad = respuesta[0][0].x + 1;
       
@@ -60,7 +62,6 @@ export const getUsuario = async (req, res) => {
       const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
       const day = String(date.getDate()).padStart(2, '0');
       const dateHoy = `${year}-${month}-${day}`;
-    try {
       const { name, description, price_cost, price_sale,quantity,image } = req.body; 
       
       const [rows] = await pool.query("INSERT INTO productos (id, nombre,descripcion,precio_costo,precio_venta,cantidad,fotografia,fecha_creacion) VALUES (?,?,?,?,?,?,?)", [
@@ -71,8 +72,7 @@ export const getUsuario = async (req, res) => {
       }
       res.json({ message: "Producto Agregado" });
     } catch (error) {
-        console.log(cantidad);
-      return res.status(500).json({ message: `Algo salio mal ${cantidad} y ${dateHoy}`});
+      return res.status(500).json({ message: `Algo salio mal ${error}`});
     }
   };
 
