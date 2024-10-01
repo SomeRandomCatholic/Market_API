@@ -65,7 +65,7 @@ export const getUsuario = async (req, res) => {
       const { name, description, price_cost, price_sale,quantity,image } = req.body; 
       
       const [rows] = await pool.query("INSERT INTO productos (id, nombre,descripcion,precio_costo,precio_venta,cantidad,fotografia,fecha_creacion) VALUES (?,?,?,?,?,?,?,?)", [
-        cantidad, name, description, price_cost, price_sale,quantity,image,dateHoy,
+        cantidad, name, description, price_cost, price_sale,quantity,image,dateHoy
       ]);
       if (rows.length <= 0) {
         return res.status(404).json({ message: "No se ingreso el producto" });
