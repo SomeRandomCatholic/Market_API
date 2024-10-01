@@ -52,7 +52,8 @@ export const getUsuario = async (req, res) => {
 
 
   export const postProductos=async(req,res)=>{
-      const cantidad = await pool.query("Select count(*) as x from productos");
+      const respuesta = await pool.query("Select count(*) as x from productos");
+      const cantidad = respuesta[0][0].x + 1;
       
       const date = new Date();
       const year = date.getFullYear();
