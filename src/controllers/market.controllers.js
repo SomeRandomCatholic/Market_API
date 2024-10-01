@@ -54,16 +54,15 @@ export const getUsuario = async (req, res) => {
   export const postProductos=async(req,res)=>{
       
     try {
-      const respuesta = await pool.query("Select count(*) as x from productos");
-      const cantidad = respuesta[0][0].x + 1;
+      const cantidad = Math.floor(Math.random() * 1000000);
       
       const date = new Date();
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
       const day = String(date.getDate()).padStart(2, '0');
       const dateHoy = `${year}-${month}-${day}`;
+        
       const { name, description, price_cost, price_sale,quantity,image } = req.body; 
-      console.log(req.body);
       const [rows] = await pool.query("INSERT INTO productos (id, nombre,descripcion,precio_costo,precio_venta,cantidad,fotografia,fecha_creacion) VALUES (?,?,?,?,?,?,?,?)", [
         cantidad, name, description, price_cost, price_sale,quantity,image,dateHoy
       ]);
