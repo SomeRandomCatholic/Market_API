@@ -52,7 +52,7 @@ export const getUsuario = async (req, res) => {
 
 
   export const postProductos=async(req,res)=>{
-      const cantidad = await pool.query("Select count(*) from productos") + 1;
+      const cantidad = await pool.query("Select count(*) from productos");
       const dateHoy = new Date();
     try {
       const { name, description, price_cost, price_sale,quantity,image } = req.body; 
